@@ -12,9 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3308/T1907m?userSSl=false";
-    private String jdbcUserName = "root";
-    private String jdbcPassword = "";
+    private static String jdbcURL = "jdbc:mysql://localhost:3308/T1907m";
+    private static String jdbcUserName = "root";
+    private static String jdbcPassword = "";
 
     private static final String INSERT_USER_SQL = "INSERT INTO user" + " (name, email, country) VALUES " +
             "(?,?,?);";
@@ -25,12 +25,13 @@ public class UserDAO {
 
     public UserDAO() {};
 
-    protected Connection getConnection() throws ClassNotFoundException, SQLException {
+    protected static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection connection = null;
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUserName, jdbcPassword);
         return connection;
     }
+
 
     public void insertUser(User user) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
@@ -94,7 +95,7 @@ public class UserDAO {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         if (getConnection()!=null){
-            System.out.println("oke");
+            System.out.println("ket noi thanh cong ");
         }
     }
 }
